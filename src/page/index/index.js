@@ -1,0 +1,1 @@
+require('../common/tailwind.css');
