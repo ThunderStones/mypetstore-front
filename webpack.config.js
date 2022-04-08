@@ -33,13 +33,29 @@ module.exports = {
                 ]
             },
             {
-                test: /\.(png|svg|jpg|gif)$/i,
-                use: ['url-loader?limit=8192&name=images/[name].[hash:8].[ext]']
+                test: /\.(png|svg|jpg|gif|webp)$/i,
+                use: [{
+                    loader : 'url-loader',
+                    options: {
+                        limit: 8192,
+                        name: 'images/[name].[hash:8].[ext]',
+                        esModule: false
+                    }
+                }]
+            },
+            {
+                test: /\.htm$/,
+                use: [{
+                    loader: 'html-loader',
+                    options: {
+                        esModule: false
+                    }
+                }]
             }
         ]
     },
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),  
+        contentBase: path.join(__dirname, 'dist'),
     },
     plugins: [
         // new CleanWebpackPlugin(),
@@ -55,7 +71,7 @@ module.exports = {
             chunks: ['index'],
             minify: {
                 collapseWhitespace: false
-            }
+            },
         })
     ],
     optimization: {
