@@ -12,7 +12,7 @@ module.exports = {
     mode: 'development',
     entry: {
         'index': './src/page/index/index.js',
-        'login': './src/page/login/index.js'
+
     },
     output: {
         filename: 'js/[name].js',
@@ -85,6 +85,15 @@ module.exports = {
                     minSize: 0
                 }
             }
+        }
+    },
+    resolve: {
+        alias: {
+            util: path.resolve(__dirname, 'src/util'),
+            page: path.resolve(__dirname, 'src/page'),
+            images: path.resolve(__dirname, 'src/images'),
+            service: path.resolve(__dirname, 'src/service'),
+            node_module: path.resolve(__dirname, 'src/node_module'),
         }
     }
 };
