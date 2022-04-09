@@ -1,5 +1,5 @@
 module.exports = {
-    content: ['./src/page/**/*.*', './src/view/**/*.html'],
+    content: ['./src/page/**/*.*', './src/view/**/*.*'],
     theme: {
         extend: {
             transitionDuration: {
@@ -17,6 +17,10 @@ module.exports = {
             spacing: {
                 '19': '4.75rem',
                 '31': '8.75rem'
+            },
+            lineHeight: {
+                '12': '3rem',
+                '16': '4rem',
             }
         },
         screens: {
