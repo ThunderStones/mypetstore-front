@@ -1,6 +1,9 @@
 module.exports = {
     content: ['./src/page/**/*.*', './src/view/**/*.*'],
     theme: {
+        flex: {
+            'costom-1': '1 0 auto',
+        },
         extend: {
             transitionDuration: {
                 '3000': '3000ms'

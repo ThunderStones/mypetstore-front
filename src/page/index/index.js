@@ -1,11 +1,11 @@
 require('../common/tailwind.css');
 let $ = require('jquery');
 let _util = require('util/util.js');
-
+let _product_list = require('page/common/product-list.js');
+let _header = require('page/common/header.js');
 
 $(function () {
 
-let _header = require('page/common/header.js');
     let images = $('#imgs>img');
 
     let i = 0;

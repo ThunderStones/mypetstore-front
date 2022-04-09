@@ -5,7 +5,7 @@ const config = {
 };
 
 let _util = {
-    getAxiosIinstance : function (prefix) {
+    getAxiosInstance : function (prefix) {
         return axios.create({
             baseURL: this.getServerUrl(prefix),
             timeout: 10000,

@@ -3,7 +3,7 @@ let qs = require('qs');
 let _account_service = {
     _axio: null,
     init: function () {
-        this._axios = _util.getAxiosIinstance('/account');
+        this._axios = _util.getAxiosInstance('/account');
         return this;
     },
     login: function (username, password, resolve, reject) {

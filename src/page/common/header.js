@@ -3,6 +3,7 @@ let $ = require('jquery');
 let _account_service = require('service/accountService.js');
 
 let header = {
+    _this: this,
     init: function () {
         this.onLoad();
         this.bindEvent();
@@ -16,6 +17,7 @@ let header = {
     showLogin: function () {
         $('div.login').show();
         $('div.userinfo').hide();
+
     },
     showUserInfo: function () {
         let token = window.localStorage.getItem('token');
@@ -95,14 +97,12 @@ let header = {
             sign_in_form[0].style.backfaceVisibility = 'hidden';
             sign_on_form[0].style.backfaceVisibility = 'hidden';
             switch_signon_btn.on('click', function () {
-                console.log(1);
                 sign_in_form[0].style.transform = 'rotateY(180deg)';
                 sign_on_form[0].style.transform = 'rotateY(0deg)';
                 sign_in_form.rotate
             })
 
             switch_signin_btn.on('click', function () {
-                console.log(2);
                 sign_in_form[0].style.transform = 'rotateY(0deg)';
                 sign_on_form[0].style.transform = 'rotateY(-180deg)';
             })
