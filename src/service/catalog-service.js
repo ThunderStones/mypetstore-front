@@ -3,12 +3,13 @@ const _util = require('util/util.js');
 let _catalog_service = {
     _axios: _util.getAxiosInstance('/catalog'),
     rejectDefaule: function (res) {
-        console.log(res.data.status, res.data.msg);
+        console.log(res);
     },
     getProductList: function (product_id, resolve, reject) {
+        reject = reject || this.rejectDefaule;
         return this._axios.get(`/categories/${product_id}/products`)
             .then(resolve)
-            .catch(reject == undefined ? this.rejectDefaule : reject);
+            .catch(reject);
     },
 
     test: function () {
@@ -22,4 +23,4 @@ let _catalog_service = {
 
 }
 
-module.exports = _catalog_service.test();
+module.exports = _catalog_service;

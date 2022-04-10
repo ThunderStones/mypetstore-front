@@ -27,6 +27,7 @@ let header = {
                 if (res.data.status === 20) {
                     window.localStorage.setItem('userInfo', JSON.stringify(res.data.data));
                     $('div.userinfo span').text(res.data.data.username.substr(0, 1).toUpperCase());
+                    $('#descn-username').text(res.data.data.username);
                     $('div.login').hide();
                     $('div.userinfo').show();
                 } else if(res.data.status === 403) {
@@ -72,6 +73,7 @@ let header = {
             let form = $('#form');
             let errorMsg = $('#errorMsg');
             let rerrorMsg = $('#rerrorMsg');
+            let detail_action_panel = $('#detail-action-panel');
             $('#do_sign_in').on('click', this.login);
             $('#sign_in_btn').on('click', function () {
                 sign_in_form[0].style.transform = 'rotateY(0deg)';
@@ -108,6 +110,14 @@ let header = {
             })
 
             sign_on_form[0].style.transform = 'rotateY(-180deg)';
+
+            $('div.userinfo').on('mouseover', function () {
+                detail_action_panel.show();
+            })
+            $('div.userinfo').on('mouseout', function () {
+                detail_action_panel.hide();
+            })
+
         })
     }
 }

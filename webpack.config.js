@@ -8,6 +8,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const webpack = require('webpack');
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 module.exports = {
     mode: 'development',
     entry: {
@@ -55,7 +57,7 @@ module.exports = {
         ]
     },
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
+        contentBase: path.join(__dirname, 'dist'),  
     },
     plugins: [
         // new CleanWebpackPlugin(),
@@ -72,7 +74,15 @@ module.exports = {
             minify: {
                 collapseWhitespace: false
             },
-        })
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, 'src/images/copy'),
+                    to: path.resolve(__dirname, 'dist/images/[name][ext]'),// [ext] include dot
+                }
+            ]
+        }),
     ],
     optimization: {
         minimize: false,
