@@ -7,7 +7,7 @@ let _account_service = {
         return this;
     },
     login: function (username, password, resolve, reject) {
-        this._axios.post('token',
+        return this._axios.post('token',
             qs.stringify({
                 username: username,
                 password: password
@@ -23,7 +23,7 @@ let _account_service = {
         this._axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     },
     getUserInfo: function (resolve, reject) {
-        this._axios.get('info')
+        return this._axios.get('info')
             .then(resolve).catch(reject);
     },
 }

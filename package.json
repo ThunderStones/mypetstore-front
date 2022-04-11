@@ -7,7 +7,7 @@
     "buildcss": "tailwind -o .\\src\\page\\common\\tailwind.css",
     "build": "npm run buildcss && npm run clean && webpack",
     "clean": "rimraf  ./dist",
-    "start": "webpack-dev-server --open",
+    "start": "webpack && webpack-dev-server --open",
     "buildw": "webpack --watch"
   },
   "author": "woog",

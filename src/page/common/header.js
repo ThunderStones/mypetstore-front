@@ -1,6 +1,6 @@
 
 let $ = require('jquery');
-let _account_service = require('service/accountService.js');
+let _account_service = require('service/account_service.js');
 
 let header = {
     _account: null,
@@ -20,6 +20,12 @@ let header = {
         $('div.login').show();
         $('div.userinfo').hide();
 
+    },
+    showLoginForm: function () {
+        sign_in_form[0].style.transform = 'rotateY(0deg)';
+        sign_on_form[0].style.transform = 'rotateY(-180deg)';
+        shadow.show();
+        form.show(400);
     },
     showUserInfo: function () {
         console.log('show userinfo');

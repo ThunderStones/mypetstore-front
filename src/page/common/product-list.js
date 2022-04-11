@@ -1,5 +1,5 @@
 const $ = require('jquery');
-const _catalog_service = require('service/catalog-service.js');
+const _catalog_service = require('service/catalog_service.js');
 let _product_list = {
     select_item_id: '',
     catalog_box: $('.catalog_boxes>div'),

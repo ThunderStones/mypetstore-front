@@ -1,0 +1,39 @@
+<div class="hidden edit_address_shadow w-full h-full absolute top-0 left-0 z-10"></div>
+<div
+    class="hidden edit_address fixed w-806  top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white shadow-md border-2 z-10">
+    <div class="flex flex-col w-4/5 h-full py-8 mx-auto space-y-4">
+        <div class="title text-center my-4">Lorem.</div>
+        <div class="text-center pr-32">
+            <label for="edit_name" class="inline-block w-20">收货人：</label>
+            <input type="text" id="edit_name" autocomplete="off"
+                class="border-2 ml-4 py-2 px-4 w-72 rounded-2xl outline-none focus:ring-1">
+        </div>
+        <div class="text-center pr-32">
+            <label for="edit_phone" class="inline-block w-20">手机号码：</label>
+            <input type="text" id="edit_phone" autocomplete="off"
+                class="border-2 ml-4 py-2 px-4 w-72 rounded-2xl outline-none focus:ring-1">
+        </div>
+        <div class="text-center pr-32">
+            <label for="name" class="inline-block w-20">所在地区：</label>
+            <div class="ml-4 py-2 px-4 w-72 inline-block">
+                <select name="" class="inline-block w-20 h-6 " id="province_select">
+                    <option value="0">请选择</option>
+                </select>
+                <select name="" class="inline-block w-20 h-6" id="city_select">
+                    <option value="0">请选择</option>
+                </select>
+                <select name="" class="inline-block w-20 h-6" id="distinct_select">
+                    <option value="0">请选择</option>
+                </select>
+            </div>
+        </div>
+        <div class="text-center pr-32">
+            <label for="edit_detail_address" class="inline-block w-20">详细地址：</label>
+            <input type="text" id="edit_detail_address" autocomplete="off"
+                class="border-2 ml-4 py-2 px-4 w-72 rounded-2xl outline-none focus:ring-1">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="text-lg border-2 py-2 px-4 rounded-2xl bg-blue-600 text-white hover:ring-1 hover:bg-blue-800">提交</button>
+        </div>  
+    </div>
+</div>
