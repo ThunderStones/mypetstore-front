@@ -22,6 +22,9 @@ module.exports = {
                 '17': '4.25rem',
                 '18': '4.5rem',
                 '19': '4.75rem',
+                '75screen': '75vh',
+                '1000': '1000px',
+                '806': '806px',
             },
             lineHeight: {
                 '12': '3rem',

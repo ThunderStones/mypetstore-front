@@ -25,7 +25,7 @@ let _account_service = {
     getUserInfo: function (resolve, reject) {
         this._axios.get('info')
             .then(resolve).catch(reject);
-    }
+    },
 }
 
 module.exports = _account_service.init();

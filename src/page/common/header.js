@@ -3,6 +3,7 @@ let $ = require('jquery');
 let _account_service = require('service/accountService.js');
 
 let header = {
+    _account: null,
     _this: this,
     init: function () {
         this.onLoad();
@@ -15,22 +16,26 @@ let header = {
         
     },
     showLogin: function () {
+        console.log('show login');
         $('div.login').show();
         $('div.userinfo').hide();
 
     },
     showUserInfo: function () {
+        console.log('show userinfo');
         let token = window.localStorage.getItem('token');
         _account_service.setToken(token);
         _account_service.getUserInfo(
             (res) => {
+                console.log(res);
                 if (res.data.status === 20) {
+                    this._account = res.data.data;
                     window.localStorage.setItem('userInfo', JSON.stringify(res.data.data));
                     $('div.userinfo span').text(res.data.data.username.substr(0, 1).toUpperCase());
                     $('#descn-username').text(res.data.data.username);
                     $('div.login').hide();
                     $('div.userinfo').show();
-                } else if(res.data.status === 403) {
+                } else {
                     window.localStorage.removeItem('token');
                     window.localStorage.removeItem('userInfo');
                     header.showLogin();

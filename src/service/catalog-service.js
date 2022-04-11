@@ -11,6 +11,18 @@ let _catalog_service = {
             .then(resolve)
             .catch(reject);
     },
+    getProductById: function (product_id, resolve, reject) {
+        reject = reject || this.rejectDefaule;
+        return this._axios.get(`/products/${product_id}`)
+            .then(resolve)
+            .catch(reject);
+    },
+    getItemsByProductId: function (product_id, resolve, reject) {
+        reject = reject || this.rejectDefaule;
+        return this._axios.get(`/products/${product_id}/items`)
+            .then(resolve)
+            .catch(reject);
+    },
 
     test: function () {
         console.log('test');
@@ -20,7 +32,7 @@ let _catalog_service = {
             })
         return this;
     }
-
+    
 }
 
 module.exports = _catalog_service;

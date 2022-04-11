@@ -10,12 +10,26 @@ const webpack = require('webpack');
 
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+ let getHTMLConfig = function (name) {
+    return {
+        template: `./src/view/${name}.html`,
+        filename: `view/${name}.html`,
+        inject: true,
+        hash: true,
+        chunks: [name],
+        minify: {
+            collapseWhitespace: false
+        }
+    };
+};
+
 module.exports = {
     mode: 'development',
     entry: {
         'index': './src/page/index/index.js',
-
+        'account': './src/page/account/account.js',
     },
+    
     output: {
         filename: 'js/[name].js',
         path: path.resolve(__dirname, 'dist')
@@ -37,7 +51,7 @@ module.exports = {
             {
                 test: /\.(png|svg|jpg|gif|webp)$/i,
                 use: [{
-                    loader : 'url-loader',
+                    loader: 'url-loader',
                     options: {
                         limit: 8192,
                         name: 'images/[name].[hash:8].[ext]',
@@ -57,7 +71,7 @@ module.exports = {
         ]
     },
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),  
+        contentBase: path.join(__dirname, 'dist'),
     },
     plugins: [
         // new CleanWebpackPlugin(),
@@ -65,16 +79,8 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "css/[name].css"
         }),
-        new HtmlWebpackPlugin({
-            template: './src/view/index.html',
-            filename: 'view/index.html',
-            inject: true,
-            hash: true,
-            chunks: ['index'],
-            minify: {
-                collapseWhitespace: false
-            },
-        }),
+        new HtmlWebpackPlugin(getHTMLConfig('index')),
+        new HtmlWebpackPlugin(getHTMLConfig('account')),
         new CopyWebpackPlugin({
             patterns: [
                 {
