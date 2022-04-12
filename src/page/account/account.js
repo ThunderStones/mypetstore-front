@@ -10,9 +10,9 @@ let _account = {
     profile_panel: $('#profile_control'),
     address_panel: $('#address_control'),
     password_panel: $('#password_control'),
-    profile_btn :$('#profile_btn'),
-    address_btn :$('#address_btn'),
-    password_btn :$('#password_btn'),
+    profile_btn: $('#profile_btn'),
+    address_btn: $('#address_btn'),
+    password_btn: $('#password_btn'),
     init: function () {
 
         this.loadData();
@@ -82,7 +82,15 @@ let _account = {
             address_info_copy.data('address', addressList[i]);
             address_info_box.append(address_info_copy);
         }
+        let edit_btn = $('.edit_btn');
+        edit_btn.on('click', function () {
+            let address_data = $(this).parents('.address_info').data('address');
+            _edit_address.showEditAddressForm(address_data);
+        })
         address_info_box.append(add_address);
+        add_address.on('click', function () {
+            _edit_address.showEditAddressForm();
+        });
     },
     bindEvent: function () {
         let _this = this;
@@ -105,20 +113,19 @@ let _account = {
             _this.address_panel.addClass('hidden');
             _this.password_panel.removeClass('hidden');
         });
-        let edit_btn = $('.edit_btn');
-        edit_btn.on('click', function () {
-            let address_data = $(this).parents('.address_info').data('address');
-        })
+
     },
-    setButtonBlue: function(selected_btn) {
+    setButtonBlue: function (selected_btn) {
         let btn_array = [this.profile_btn, this.address_btn, this.password_btn];
-        btn_array.forEach(function(btn) {
+        btn_array.forEach(function (btn) {
             btn.removeClass('bg-blue-600');
             btn.removeClass('text-white');
+            btn.addClass('hover:bg-gray-200');
+
         })
         selected_btn.addClass('bg-blue-600');
         selected_btn.addClass('text-white');
-        selected_btn.removeClass('hover:bg-gray-200');  
+        selected_btn.removeClass('hover:bg-gray-200');
     }
 
 
