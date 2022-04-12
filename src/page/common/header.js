@@ -13,7 +13,6 @@ let header = {
     onLoad: function () {
         console.log(window.localStorage.getItem('token'))
         window.localStorage.getItem('token') === null ? this.showLogin() : this.showUserInfo();
-        
     },
     showLogin: function () {
         console.log('show login');
@@ -50,7 +49,7 @@ let header = {
     },
     login: function () {
         username = $('#username').val();
-        password = $('#password').val(); 
+        password = $('#password').val();
         if (username === '' || password === '') {
             $('.errorMsg').text('Username or password cannot be empty');
             return;

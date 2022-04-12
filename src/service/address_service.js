@@ -41,6 +41,11 @@ let _address_service = {
         reject = reject || this.rejectDefaule;
         return this._axios.get('')
             .then(resolve).catch(reject);
+    },
+    modifyAddress: function (address, resolve, reject) {
+        reject = reject || this.rejectDefaule;
+        return this._axios.put('', address)
+            .then(resolve).catch(reject);
     }
 
 }

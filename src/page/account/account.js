@@ -17,10 +17,12 @@ let _account = {
 
         this.loadData();
         this.bindEvent();
+        this.setButtonBlue(this.profile_btn);
+        return this;
     },
     loadData: function () {
-        this.loadAccount();
-        this.loadAddress();
+        _account.loadAccount();
+        _account.loadAddress();
     },
     loadAccount: async function () {
         let token = window.localStorage.getItem('token');
@@ -57,6 +59,7 @@ let _account = {
         _address_service.setToken(token);
 
         let res = await _address_service.getAddressList();
+        console.log(res);
         if (res.data.status === 20) {
             this.address = res.data.data;
         } else {
@@ -67,8 +70,9 @@ let _account = {
 
 
     },
-    renderAddress: function () {
-        let addressList = this.address;
+    renderAddress: async function () {
+        await _account.loadAddress();
+        let addressList = _account.address;
         let address_info_box = $('#address_info_box');
         let address_info = address_info_box.find('.address_info').eq(0);
         let add_address = address_info_box.find('.add_address').eq(0);
@@ -85,11 +89,11 @@ let _account = {
         let edit_btn = $('.edit_btn');
         edit_btn.on('click', function () {
             let address_data = $(this).parents('.address_info').data('address');
-            _edit_address.showEditAddressForm(address_data);
+            _edit_address.showEditAddressForm(address_data, _account.renderAddress);
         })
         address_info_box.append(add_address);
         add_address.on('click', function () {
-            _edit_address.showEditAddressForm();
+            _edit_address.showEditAddressForm(undefined, _account.renderAddress);
         });
     },
     bindEvent: function () {

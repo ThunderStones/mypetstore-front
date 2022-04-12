@@ -1,5 +1,5 @@
 const axios = require('axios'); 
-
+let $ = require('jquery');
 const config = {
     serverHost : 'http://112.124.27.34',
 };
@@ -26,8 +26,19 @@ let _util = {
             'password' : /^[a-zA-Z0-9]{6,16}$/,
             'username' : /^[a-zA-Z0-9]{4,16}$/,
             'country' : /^[a-zA-Z]{2,16}$/,
+            'require' : /.+/,
         }
         return reg[type].test(value);
+    },
+    showErrorMsg: function (msg) {
+        $('#error_shadow').on('click', function () {
+            console.log('click');
+            $('#error_shadow').hide();
+            $('#errorMsg').hide(400);
+        })
+        $('#error_shadow').show();
+        $('#errorMsg').find('.msg').text(msg);
+        $('#errorMsg').show(400);
     }
 
 };

@@ -26,6 +26,17 @@ let _account_service = {
         return this._axios.get('info')
             .then(resolve).catch(reject);
     },
+    modifyUserInfo: function (userInfo, resolve, reject) {
+        return this._axios.put('user', userInfo)
+            .then(resolve).catch(reject);
+    },
+    modifyPassword: async function (oldPassword, newPassword, resolve, reject) {
+        let account = (await this.getUserInfo()).data;
+        let res = await this.login(account.username, oldPassword);
+        if (res.data.status !== 20) {
+
+        }
+    }
 }
 
 module.exports = _account_service.init();
