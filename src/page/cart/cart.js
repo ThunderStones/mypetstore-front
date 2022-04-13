@@ -12,7 +12,6 @@ let _cart = {
         console.log(this.item_template);
         this.loadData();
         this.bindEvent();
-
         return this;
     },
     loadData: async function () {
@@ -20,6 +19,11 @@ let _cart = {
         if (res.data.status === 20) {
             item_list = res.data.data;
             let _this = this;
+            if (item_list.length === 0) {
+                $('.cart_submit').hide();
+            } else {
+                $('#tips').hide();
+            }
             this.total = 0;
             for (let index = 0; index < item_list.length; index++) {
                 const element = item_list[index];
@@ -39,9 +43,7 @@ let _cart = {
                 $('.cart_items').append($item);
                 console.log(_this.cart_items);
             }
-            if (item_list.length === 0) {
-                $('.cart_submit').hide();
-            }
+
             $('.total').find('span').text(this.total);
             $('.cart-number-dec').on('click', function () {
                 let item = $(this).parents('.cart_item').data('item');
@@ -70,15 +72,22 @@ let _cart = {
                 $('.total span').text(_this.total);
                 _cart_service.deleteCartItem([{ itemId: item.itemId }]);
                 // delete property itemId
-                _this.cart_items[item.itemId] = undefined;
+                if (_this.total <= 0) {
+                    $('.cart_submit').hide();
+
+                }
                 $(this).parents('.cart_item').remove();
             })
 
 
         }
     },
-    bindEvent: function () { },
-    updateQuantity: function (productId, quantity) { }
+    bindEvent: function () {
+        $('.cart_submit').on('click', function () {
+            window.location.href = '/view/order.html';
+        })
+    }
+
 }
 
 module.exports = _cart.init();

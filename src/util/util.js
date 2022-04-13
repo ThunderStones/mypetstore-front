@@ -1,5 +1,7 @@
 const axios = require('axios'); 
-let $ = require('jquery');
+const $ = require('jquery');
+const hogan = require('hogan.js');
+
 const config = {
     serverHost : 'http://112.124.27.34',
     serverHost1 : 'http://localhost',
@@ -42,6 +44,10 @@ let _util = {
             $('#error_shadow').hide();
             $('#errorMsg').hide(400);
         })
+    },
+    renderHtml: function (htmlTemplate, data) {
+        let template = hogan.compile(htmlTemplate);
+        return template.render(data);
     }
 
 };

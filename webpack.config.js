@@ -29,6 +29,7 @@ module.exports = {
         'index': './src/page/index/index.js',
         'account': './src/page/account/account.js',
         'cart': './src/page/cart/cart.js',
+        'order': './src/page/order/order.js',
     },
     
     output: {
@@ -61,7 +62,7 @@ module.exports = {
                 }]
             },
             {
-                test: /\.htm$/,
+                test: /\.(htm|template)$/,
                 use: [{
                     loader: 'html-loader',
                     options: {
@@ -83,6 +84,7 @@ module.exports = {
         new HtmlWebpackPlugin(getHTMLConfig('index')),
         new HtmlWebpackPlugin(getHTMLConfig('account')),
         new HtmlWebpackPlugin(getHTMLConfig('cart')),
+        new HtmlWebpackPlugin(getHTMLConfig('order')),
         new CopyWebpackPlugin({
             patterns: [
                 {
