@@ -1,0 +1,16 @@
+<div class="px-4 order_item w-4/5 mx-auto h-32 border-2 my-4 shadow flex items-center justify-between">
+    <div class="w-40">{{item.orderDate}}</div>
+    <div class="h-full w-0.5 bg-slate-200"></div>
+    <div class="w-32">
+        <div>{{item.name}}</div>
+        <div>{{item.phone}}</div>
+    </div>
+    <div class="h-full w-0.5 bg-slate-200"></div>
+
+    <div class="w-72">
+        <div>{{item.addressName}}</div>
+        <div>{{item.addressDetail}}</div>
+    </div>
+    <div class="h-full w-0.5 bg-slate-200"></div>
+    <div class="w-24"> $ {{item.totalPrice}}</div>
+</div>

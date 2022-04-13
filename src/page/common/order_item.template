@@ -1,0 +1,11 @@
+<div class="item flex justify-between w-full h-16 my-8 rounded-lg overflow-hidden border-2">
+    <div class="left">
+        <img src={{cart_item.imgPath}} alt="" class="h-16 w-16 object-cover inline-block">
+        <span class="quantity text-lg">
+            x {{cart_item.quantity}}
+        </span>
+    </div>
+    <div class="right leading-16 px-4">
+        $ <span class="sub_totol">{{cart_item.total}}</span>
+    </div>
+</div>

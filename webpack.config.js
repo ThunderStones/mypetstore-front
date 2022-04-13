@@ -30,6 +30,7 @@ module.exports = {
         'account': './src/page/account/account.js',
         'cart': './src/page/cart/cart.js',
         'order': './src/page/order/order.js',
+        'view_order': './src/page/view_order/view_order.js',
     },
     
     output: {
@@ -85,6 +86,7 @@ module.exports = {
         new HtmlWebpackPlugin(getHTMLConfig('account')),
         new HtmlWebpackPlugin(getHTMLConfig('cart')),
         new HtmlWebpackPlugin(getHTMLConfig('order')),
+        new HtmlWebpackPlugin(getHTMLConfig('view_order')),
         new CopyWebpackPlugin({
             patterns: [
                 {

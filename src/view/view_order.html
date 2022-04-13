@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<%= require('./common/header.htm') %>
+
+    <body>
+        <%= require('./common/nav.htm') %>
+            <div class="h-16 w-0"></div>
+            <div class="h-24 bg-slate-100" id="banner">
+                <!-- <img src="<%= require('../images/banner.jpg') %>" class="object-cover h-24 mx-auto" alt="banner"> -->
+            </div>
+            <div class="content mx-auto w-3/4 min-h-screen">
+
+                <div class="order_list w-full border-2 shadow-lg py-8">
+                    <div class="inline-block w-1/2 h-16 leading-16 pl-24 text-blue-600 text-lg">
+                        <span class="title_icon bg-blue-500 w-2 h-4">&nbsp;</span>
+                        我的订单
+                    </div>
+                </div>
+            </div>
+            <%= require('./common/footer.htm') %>
+
+                <div id="detail_shadow" class="fixed bg-gray-0 opacity-50 hidden top-0 left-0 h-full w-full z-60"></div>
+                <div class="fixed hidden top-1/2 left-1/2 bg-white w-806 -translate-x-1/2 -translate-y-1/2 z-70 shadow-md rounded-3xl"
+                    id="detail_container">
+
+                </div>
+    </body>
+
+</html>
