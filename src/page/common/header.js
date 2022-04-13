@@ -1,6 +1,7 @@
 
 let $ = require('jquery');
 let _account_service = require('service/account_service.js');
+const _util = require('../../util/util');
 
 let header = {
     _account: null,
@@ -15,7 +16,6 @@ let header = {
         window.localStorage.getItem('token') === null ? this.showLogin() : this.showUserInfo();
     },
     showLogin: function () {
-        console.log('show login');
         $('div.login').show();
         $('div.userinfo').hide();
 
@@ -128,6 +128,40 @@ let header = {
                 detail_action_panel.hide();
             })
 
+        })
+        $('#sign-out-btn').on('click', function () {
+            window.localStorage.removeItem('token');
+            window.localStorage.removeItem('userInfo');
+            header.showLogin();
+            window.location.href = '/view/index.html';
+        });
+
+        $('#do_sign_up').on('click', async function () {
+            let username = $('#r_username').val();
+            let password = $('#r_password').val();
+            let confirmPassword = $('#r_repeat').val();
+            if (username === '' || password === '' || confirmPassword === '') {
+                _util.showErrorMsg('Username or password cannot be empty');
+                return;
+            }
+            if (password !== confirmPassword) {
+                _util.showErrorMsg('Password and confirm password do not match');
+                return;
+            }
+            let res = await _account_service.register(username, password);
+            if (res.data.status === 20) {
+                _util.showErrorMsg('Register successfully');
+                shadow.hide();
+                form.hide(400);
+            } else {
+                _util.showErrorMsg(res.data.msg);
+            }
+            let loginRes = await _account_service.login(username, password);
+            if (loginRes.data.status === 20) {
+                window.localStorage.setItem('token', loginRes.data.data.token);
+                window.localStorage.setItem('userInfo', JSON.stringify(loginRes.data.data));
+                header.showUserInfo();
+            }
         })
     }
 }

@@ -28,6 +28,7 @@ module.exports = {
     entry: {
         'index': './src/page/index/index.js',
         'account': './src/page/account/account.js',
+        'cart': './src/page/cart/cart.js',
     },
     
     output: {
@@ -81,6 +82,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin(getHTMLConfig('index')),
         new HtmlWebpackPlugin(getHTMLConfig('account')),
+        new HtmlWebpackPlugin(getHTMLConfig('cart')),
         new CopyWebpackPlugin({
             patterns: [
                 {

@@ -31,12 +31,10 @@ let _account_service = {
             .then(resolve).catch(reject);
     },
     modifyPassword: async function (oldPassword, newPassword, resolve, reject) {
-        let account = (await this.getUserInfo()).data;
-        let res = await this.login(account.username, oldPassword);
-        if (res.data.status !== 20) {
+        return this._axios.put('/user/password', { oldPassword: oldPassword, password: newPassword })
+            .then(resolve).catch(reject);
 
-        }
-    }
+    },
 }
 
 module.exports = _account_service.init();

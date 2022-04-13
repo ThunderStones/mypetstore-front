@@ -4,6 +4,14 @@ module.exports = {
         flex: {
             'costom-1': '1 0 auto',
         },
+        zIndex: {
+            '60': '60',
+            '70': '70',
+            '80': '80',
+            '90': '90',
+            '100': '100',
+            '110': '110',
+        },
         extend: {
             transitionDuration: {
                 '3000': '3000ms'

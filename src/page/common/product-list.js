@@ -1,5 +1,7 @@
 const $ = require('jquery');
 const _catalog_service = require('service/catalog_service.js');
+const _util = require('util/util.js');
+const _cart_service = require('service/cart_service.js');
 let _product_list = {
     select_item_id: '',
     catalog_box: $('.catalog_boxes>div'),
@@ -9,7 +11,6 @@ let _product_list = {
     list_detail_box: $('#product_detail'),
     init: function () {
         this.bindEvent();
-        console.log(this.catalog_box);
         return this;
     },
     bindEvent: function () {
@@ -33,8 +34,15 @@ let _product_list = {
             _product_list.list_box.addClass('hidden');
             _product_list.list_shadow.addClass('hidden');
         })
-        this.list_detail_box.find('#add_to_cart_btn').on('click', function () {
+        this.list_detail_box.find('#add_to_cart_btn').on('click', async function () {
             console.log(_product_list.select_item_id);
+            let data = {itemId: _product_list.select_item_id, quantity: 1};
+            let res = await _cart_service.updateCartItems([data]);
+            if (res.data.status === 20) {
+                _util.showErrorMsg('加入购物车成功');
+            } else {
+                _util.showErrorMsg(res.msg);
+            }
         })
     },
     renderAndShow: function (_this, data) {

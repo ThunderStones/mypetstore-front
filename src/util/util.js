@@ -2,6 +2,7 @@ const axios = require('axios');
 let $ = require('jquery');
 const config = {
     serverHost : 'http://112.124.27.34',
+    serverHost1 : 'http://localhost',
 };
 
 let _util = {
@@ -31,14 +32,16 @@ let _util = {
         return reg[type].test(value);
     },
     showErrorMsg: function (msg) {
+        console.log(msg);
+
+        $('#error_shadow').show();
+        $('#errorMsg').find('.msg').text(msg);
+        $('#errorMsg').show(400);
         $('#error_shadow').on('click', function () {
             console.log('click');
             $('#error_shadow').hide();
             $('#errorMsg').hide(400);
         })
-        $('#error_shadow').show();
-        $('#errorMsg').find('.msg').text(msg);
-        $('#errorMsg').show(400);
     }
 
 };

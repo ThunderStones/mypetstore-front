@@ -23,7 +23,12 @@ let _catalog_service = {
             .then(resolve)
             .catch(reject);
     },
-
+    getItemByItemId: function (item_id, resolve, reject) {
+        reject = reject || this.rejectDefaule;
+        return this._axios.get(`/items/${item_id}`)
+            .then(resolve)
+            .catch(reject);
+    },
     test: function () {
         console.log('test');
         this.getProductList('DOGS',

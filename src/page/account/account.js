@@ -4,6 +4,7 @@ require('../common/tailwind.css');
 let _address_service = require('service/address_service.js');
 let _account_service = require('service/account_service.js');
 let _edit_address = require('../common/edit_address.js');
+const _util = require('../../util/util');
 let _account = {
     account: null,
     address: null,
@@ -93,7 +94,7 @@ let _account = {
         })
         address_info_box.append(add_address);
         add_address.on('click', function () {
-            _edit_address.showEditAddressForm(undefined, _account.renderAddress);
+            _edit_address.showNewAddressForm(_account.renderAddress);
         });
     },
     bindEvent: function () {
@@ -117,6 +118,92 @@ let _account = {
             _this.address_panel.addClass('hidden');
             _this.password_panel.removeClass('hidden');
         });
+        $('#submit_profile').on('click', async function () {
+
+            let account = _header._account;
+            $('#E-mail_field').removeClass('border-red-600');
+            $('#phone_field').removeClass('border-red-600');
+            $('#country_field').removeClass('border-red-600');
+            $('#first_name_field').removeClass('border-red-600');
+            $('#last_name_field').removeClass('border-red-600');
+            let email = $('#E-mail_field').val();
+            let phone = $('#phone_field').val();
+            let country = $('#country_field').val();
+            let firstName = $('#first_name_field').val();
+            let lastName = $('#last_name_field').val();
+            // validate not empty
+            flag = false;
+            if (_util.validation(email, 'require') === false) {
+                flag = true;
+                $('#E-mail_field').addClass('border-red-600');
+            }
+            if (_util.validation(phone, 'require') === false) {
+                flag = true;
+                $('#phone_field').addClass('border-red-600');
+            }
+            if (_util.validation(country, 'require') === false) {
+                flag = true;
+                $('#country_field').addClass('border-red-600');
+            }
+            if (_util.validation(firstName, 'require') === false) {
+                flag = true;
+                $('#first_name_field').addClass('border-red-600');
+            }
+            if (_util.validation(lastName, 'require') === false) {
+                flag = true;
+                $('#last_name_field').addClass('border-red-600');
+            }
+            if (flag) {
+                return;
+            }
+            account.email = email;
+            account.phone = phone;
+            account.country = country;
+            account.firstName = firstName;
+            account.lastName = lastName;
+            let res = await _account_service.modifyUserInfo(account);
+            console.log(res);
+            if (res.data.status === 20) {
+                _util.showErrorMsg('修改成功');
+            }
+        });
+
+        $('#submit_password').on('click', async function () {
+            let oldPassword = $('#old_password').val();
+            let newPassword = $('#new_password').val();
+            let confirmPassword = $('#confirm_password').val();
+            $('#old_password').removeClass('border-red-600');
+            $('#new_password').removeClass('border-red-600');
+            $('#confirm_password').removeClass('border-red-600');
+            if (_util.validation(oldPassword, 'require') === false) {
+                $('#old_password').addClass('border-red-600');
+                return;
+            }
+            if (_util.validation(newPassword, 'require') === false) {
+                $('#new_password').addClass('border-red-600');
+                return;
+            }
+            if (_util.validation(confirmPassword, 'require') === false) {
+                $('#confirm_password').addClass('border-red-600');
+                return;
+            }
+            if (newPassword !== confirmPassword) {
+                $('#new_password').addClass('border-red-600');
+                $('#confirm_password').addClass('border-red-600');
+                _util.showErrorMsg('两次输入的密码不一致');
+                return;
+            }
+            let res = await _account_service.modifyPassword(oldPassword, newPassword);
+            console.log(res);
+            if (res.data.status === 20) {
+                _util.showErrorMsg('修改成功');
+            } else if(res.data.status === 43){
+                _util.showErrorMsg('原密码错误');
+            } else {
+                _util.showErrorMsg('服务器内部错误');
+            }
+        })
+
 
     },
     setButtonBlue: function (selected_btn) {
@@ -131,7 +218,6 @@ let _account = {
         selected_btn.addClass('text-white');
         selected_btn.removeClass('hover:bg-gray-200');
     }
-
 
 }
 
