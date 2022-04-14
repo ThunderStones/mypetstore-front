@@ -9,7 +9,7 @@ $(function () {
     let images = $('#imgs>img');
 
     let i = 0;
-   
+
 
     function changeImg() {
         $(images[i]).removeClass('opacity-40').addClass('opacity-0');
@@ -25,6 +25,18 @@ $(function () {
         }, 1000);
     });
 
-   
+    let date = new Date();
+    let hour = date.getHours();
+    let greeting = '';
+    if (hour < 12) {
+        greeting = 'Good morning';
+    } else if (hour < 18) {
+        greeting = 'Good afternoon'; 
+    } else {
+        greeting = 'Good evening';
+    }
+    $('#hello').text(greeting);
+
+
 
 })

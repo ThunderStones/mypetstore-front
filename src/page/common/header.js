@@ -59,133 +59,134 @@ let header = {
     },
     login: function () {
         username = $('#username').val();
-password = $('#password').val();
-if (username === '' || password === '') {
-    $('.errorMsg').text('Username or password cannot be empty');
-    return;
-}
-_account_service.login(username, password,
-    (res) => {
-        if (res.data.status === 20) {
-            console.log(1);
-            window.localStorage.setItem('token', res.data.data.token);
-            console.log(2);
-            header.setToken();
-            header.showUserInfo();
-            $('#errorMsg').html('');
-            $('#rerrorMsg').html('');
-            $('#shadow').hide();
-            $('#form').hide(400)
-        } else if (res.data.status === 10) {
-            $('errorMsg').text(res.data.msg);
-        }
-    },
-    (err) => {
-        console.log(err);
-    }
-)
-    },
-
-bindEvent: function () {
-    $(() => {
-        let switch_signin_btn = $('#switch_sign_in');
-        let switch_signon_btn = $('#switch_sign_on');
-        let sign_in_form = $('#signin');
-        let sign_on_form = $('#signon');
-        let shadow = $('#shadow');
-        let form = $('#form');
-        let errorMsg = $('#errorMsg');
-        let rerrorMsg = $('#rerrorMsg');
-        let detail_action_panel = $('#detail-action-panel');
-        $('#do_sign_in').on('click', this.login);
-        $('#sign_in_btn').on('click', function () {
-            sign_in_form[0].style.transform = 'rotateY(0deg)';
-            sign_on_form[0].style.transform = 'rotateY(-180deg)';
-            shadow.show();
-            form.show(400);
-        })
-        $('#sign_up_btn').on('click', function () {
-            sign_in_form[0].style.transform = 'rotateY(180deg)';
-            sign_on_form[0].style.transform = 'rotateY(0deg)';
-            shadow.show();
-            form.show(400);
-        })
-
-        shadow.on('click', function () {
-            errorMsg.html('');
-            rerrorMsg.html('');
-            shadow.hide();
-            form.hide(400)
-        })
-
-
-        sign_in_form[0].style.backfaceVisibility = 'hidden';
-        sign_on_form[0].style.backfaceVisibility = 'hidden';
-        switch_signon_btn.on('click', function () {
-            sign_in_form[0].style.transform = 'rotateY(180deg)';
-            sign_on_form[0].style.transform = 'rotateY(0deg)';
-            sign_in_form.rotate
-        })
-
-        switch_signin_btn.on('click', function () {
-            sign_in_form[0].style.transform = 'rotateY(0deg)';
-            sign_on_form[0].style.transform = 'rotateY(-180deg)';
-        })
-
-        sign_on_form[0].style.transform = 'rotateY(-180deg)';
-
-        $('div.userinfo').on('mouseover', function () {
-            detail_action_panel.show();
-        })
-        $('div.userinfo').on('mouseout', function () {
-            detail_action_panel.hide();
-        })
-
-    })
-    $('#sign-out-btn').on('click', function () {
-        console.log(3);
-        window.localStorage.removeItem('token');
-        window.localStorage.removeItem('userInfo');
-        _account_service._axios.defaults.headers.common['Authorization'] = null;
-        _address_service._axios.defaults.headers.common['Authorization'] = null;
-        _cart_service._axios.defaults.headers.common['Authorization'] = null;
-        _order_service._axios.defaults.headers.common['Authorization'] = null;
-        header.showLogin();
-        window.location.href = '/view/index.html';
-    });
-
-    $('#do_sign_up').on('click', async function () {
-        let username = $('#r_username').val();
-        let password = $('#r_password').val();
-        let confirmPassword = $('#r_repeat').val();
-        if (username === '' || password === '' || confirmPassword === '') {
-            _util.showErrorMsg('Username or password cannot be empty');
+        password = $('#password').val();
+        if (username === '' || password === '') {
+            $('.errorMsg').text('Username or password cannot be empty');
             return;
         }
-        if (password !== confirmPassword) {
-            _util.showErrorMsg('Password and confirm password do not match');
-            return;
-        }
-        let res = await _account_service.register(username, password);
-        if (res.data.status === 20) {
-            _util.showErrorMsg('Register successfully');
-            shadow.hide();
-            form.hide(400);
-        } else {
-            _util.showErrorMsg(res.data.msg);
-        }
-        let loginRes = await _account_service.login(username, password);
-        if (loginRes.data.status === 20) {
-            window.localStorage.setItem('token', loginRes.data.data.token);
-            window.localStorage.setItem('userInfo', JSON.stringify(loginRes.data.data));
-            header.setToken();
-            header.showUserInfo();
-        }
-    });
-    $('#searchInput').on('focus', function () {
-        $('#search').hide(400);
-    })
-},
+        _account_service.login(username, password,
+            (res) => {
+                if (res.data.status === 20) {
+                    console.log(1);
+                    window.localStorage.setItem('token', res.data.data.token);
+                    console.log(2);
+                    header.setToken();
+                    header.showUserInfo();
+                    $('#errorMsg').html('');
+                    $('#rerrorMsg').html('');
+                    $('#shadow').hide();
+                    $('#form').hide(400)
+                } else if (res.data.status === 10) {
+                    console.log(1);
+                    _util.showErrorMsg(res.data.msg);
+                }
+            },
+            (err) => {
+                console.log(err);
+            }
+        )
+    },
+
+    bindEvent: function () {
+        $(() => {
+            let switch_signin_btn = $('#switch_sign_in');
+            let switch_signon_btn = $('#switch_sign_on');
+            let sign_in_form = $('#signin');
+            let sign_on_form = $('#signon');
+            let shadow = $('#shadow');
+            let form = $('#form');
+            let errorMsg = $('#errorMsg');
+            let rerrorMsg = $('#rerrorMsg');
+            let detail_action_panel = $('#detail-action-panel');
+            $('#do_sign_in').on('click', this.login);
+            $('#sign_in_btn').on('click', function () {
+                sign_in_form[0].style.transform = 'rotateY(0deg)';
+                sign_on_form[0].style.transform = 'rotateY(-180deg)';
+                shadow.show();
+                form.show(400);
+            })
+            $('#sign_up_btn').on('click', function () {
+                sign_in_form[0].style.transform = 'rotateY(180deg)';
+                sign_on_form[0].style.transform = 'rotateY(0deg)';
+                shadow.show();
+                form.show(400);
+            })
+
+            shadow.on('click', function () {
+                errorMsg.html('');
+                rerrorMsg.html('');
+                shadow.hide();
+                form.hide(400)
+            })
+
+
+            sign_in_form[0].style.backfaceVisibility = 'hidden';
+            sign_on_form[0].style.backfaceVisibility = 'hidden';
+            switch_signon_btn.on('click', function () {
+                sign_in_form[0].style.transform = 'rotateY(180deg)';
+                sign_on_form[0].style.transform = 'rotateY(0deg)';
+                sign_in_form.rotate
+            })
+
+            switch_signin_btn.on('click', function () {
+                sign_in_form[0].style.transform = 'rotateY(0deg)';
+                sign_on_form[0].style.transform = 'rotateY(-180deg)';
+            })
+
+            sign_on_form[0].style.transform = 'rotateY(-180deg)';
+
+            $('div.userinfo').on('mouseover', function () {
+                detail_action_panel.show();
+            })
+            $('div.userinfo').on('mouseout', function () {
+                detail_action_panel.hide();
+            })
+
+        })
+        $('#sign-out-btn').on('click', function () {
+            console.log(3);
+            window.localStorage.removeItem('token');
+            window.localStorage.removeItem('userInfo');
+            _account_service._axios.defaults.headers.common['Authorization'] = null;
+            _address_service._axios.defaults.headers.common['Authorization'] = null;
+            _cart_service._axios.defaults.headers.common['Authorization'] = null;
+            _order_service._axios.defaults.headers.common['Authorization'] = null;
+            header.showLogin();
+            window.location.href = '/view/index.html';
+        });
+
+        $('#do_sign_up').on('click', async function () {
+            let username = $('#r_username').val();
+            let password = $('#r_password').val();
+            let confirmPassword = $('#r_repeat').val();
+            if (username === '' || password === '' || confirmPassword === '') {
+                _util.showErrorMsg('Username or password cannot be empty');
+                return;
+            }
+            if (password !== confirmPassword) {
+                _util.showErrorMsg('Password and confirm password do not match');
+                return;
+            }
+            let res = await _account_service.register(username, password);
+            if (res.data.status === 20) {
+                _util.showErrorMsg('Register successfully');
+                $('#shadow').hide();
+                $('#form').hide(400);
+            } else {
+                _util.showErrorMsg(res.data.msg);
+            }
+            let loginRes = await _account_service.login(username, password);
+            if (loginRes.data.status === 20) {
+                window.localStorage.setItem('token', loginRes.data.data.token);
+                window.localStorage.setItem('userInfo', JSON.stringify(loginRes.data.data));
+                header.setToken();
+                header.showUserInfo();
+            }
+        });
+        $('#searchInput').on('focus', function () {
+            $('#search').hide(400);
+        })
+    },
 
 }
 

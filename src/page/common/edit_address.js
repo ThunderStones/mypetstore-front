@@ -92,6 +92,7 @@ let _edit_address = {
 
     },
     showEditAddressForm: async function (address, callback) {
+        console.log('showEditAddressForm');
         if (address === undefined) {
             this.showNewAddredatassForm(callback);
             return;
@@ -104,6 +105,7 @@ let _edit_address = {
         edit_address_form.find('#edit_detail_address').val(address.addressDetail)
         edit_address_form.find('button').data('type', 'edit');
         let _this = this;
+        edit_address_form.find('button').off('click');
         edit_address_form.find('button').on('click', async function () {
             console.log(1);
             edit_address_form.find('#edit_name').removeClass('border-red-600');
@@ -144,18 +146,21 @@ let _edit_address = {
             if (flag) {
                 return;
             }
+            console.log(address);
             let res = await _address_service.modifyAddress(address);
             if (res.data.status === 20) {
                 _util.showErrorMsg('修改成功');
             }
             $('.edit_address_shadow').hide();
             edit_address_form.hide();
+            console.log(callback);
             callback();
         })
         $('.edit_address_shadow').show();
         edit_address_form.show();
     },
     showNewAddressForm: async function (callback) {
+        console.log('showNewAddressForm')
         let _this = this;
         this.currentProvinceId = null;
         this.currentCityId = null;
@@ -164,7 +169,9 @@ let _edit_address = {
         edit_address_form.find('#edit_name').val('');
         edit_address_form.find('#edit_phone').val('');
         edit_address_form.find('#edit_detail_address').val('');
+        edit_address_form.find('button').off('click');
         edit_address_form.find('button').on('click', async function () {
+        
             let address = {};
             edit_address_form.find('#edit_name').removeClass('border-red-600');
             edit_address_form.find('#edit_phone').removeClass('border-red-600');

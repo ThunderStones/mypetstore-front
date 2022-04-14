@@ -35,6 +35,10 @@ let _account_service = {
             .then(resolve).catch(reject);
 
     },
+    register: function (username, password, resolve, reject) {
+        return this._axios.post('/user', { username: username, password: password })
+            .then(resolve).catch(reject);
+    }
 }
 
 module.exports = _account_service.init();

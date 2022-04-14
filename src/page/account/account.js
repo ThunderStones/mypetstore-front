@@ -14,8 +14,9 @@ let _account = {
     profile_btn: $('#profile_btn'),
     address_btn: $('#address_btn'),
     password_btn: $('#password_btn'),
+    address_info : $('#address_info_box').find('.address_info'),
     init: function () {
-
+        console.log(this.address_info);
         this.loadData();
         this.bindEvent();
         this.setButtonBlue(this.profile_btn);
@@ -72,8 +73,10 @@ let _account = {
 
     },
     renderAddress: async function () {
+        console.log('reload address');
         await _account.loadAddress();
         let addressList = _account.address;
+
         let address_info_box = $('#address_info_box');
         let address_info = address_info_box.find('.address_info').eq(0);
         let add_address = address_info_box.find('.add_address').eq(0);

@@ -44,6 +44,7 @@ module.exports = {
             lineHeight: {
                 '12': '3rem',
                 '16': '4rem',
+                '32': '8rem',
             }
         },
         screens: {
