@@ -1640,6 +1640,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   fill: #fca5a5;
 }
 
+.fill-white {
+  fill: #fff;
+}
+
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;

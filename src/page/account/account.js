@@ -4,6 +4,7 @@ require('../common/tailwind.css');
 let _address_service = require('service/address_service.js');
 let _account_service = require('service/account_service.js');
 let _edit_address = require('../common/edit_address.js');
+let _address_item_template = require('../common/address_item.template');
 const _util = require('../../util/util');
 let _account = {
     account: null,
@@ -14,7 +15,7 @@ let _account = {
     profile_btn: $('#profile_btn'),
     address_btn: $('#address_btn'),
     password_btn: $('#password_btn'),
-    address_info : $('#address_info_box').find('.address_info'),
+    address_info: $('#address_info_box').find('.address_info'),
     init: function () {
         console.log(this.address_info);
         this.loadData();
@@ -78,17 +79,18 @@ let _account = {
         let addressList = _account.address;
 
         let address_info_box = $('#address_info_box');
-        let address_info = address_info_box.find('.address_info').eq(0);
+        let address_info = null;
         let add_address = address_info_box.find('.add_address').eq(0);
         address_info_box.empty();
         for (let i = 0; i < addressList.length; i++) {
-            let address_info_copy = address_info.clone();
-            address_info_copy.find('.address_name').text(addressList[i].addressName);
-            address_info_copy.find('.phone').text(addressList[i].phone);
-            address_info_copy.find('.address_detail').text(addressList[i].addressDetail);
-            address_info_copy.find('.name').text(addressList[i].name);
-            address_info_copy.data('address', addressList[i]);
-            address_info_box.append(address_info_copy);
+            address_info = $(_util.renderHtml(_address_item_template, { address: addressList[i] }));
+            // let address_info_copy = address_info.clone();
+            // address_info_copy.find('.address_name').text(addressList[i].addressName);
+            // address_info_copy.find('.phone').text(addressList[i].phone);
+            // address_info_copy.find('.address_detail').text(addressList[i].addressDetail);
+            // address_info_copy.find('.name').text(addressList[i].name);
+            address_info.data('address', addressList[i]);
+            address_info_box.append(address_info);
         }
         let edit_btn = $('.edit_btn');
         edit_btn.on('click', function () {
@@ -200,7 +202,7 @@ let _account = {
             console.log(res);
             if (res.data.status === 20) {
                 _util.showErrorMsg('修改成功');
-            } else if(res.data.status === 43){
+            } else if (res.data.status === 43) {
                 _util.showErrorMsg('原密码错误');
             } else {
                 _util.showErrorMsg('服务器内部错误');
