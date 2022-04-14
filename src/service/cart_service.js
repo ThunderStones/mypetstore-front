@@ -15,10 +15,13 @@ let _cart_service = {
         this._axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     },
     updateCartItems: function (cartInfo, resolve, reject) {
+        this.setToken();
         return this._axios.put('/items', cartInfo)
             .then(resolve).catch(reject);
     },
     deleteCartItem: function (product_id_list, resolve, reject) {
+        this.setToken();
+        
         return this._axios.delete('/items', {
             data: product_id_list,
             
@@ -26,6 +29,7 @@ let _cart_service = {
             .then(resolve).catch(reject);
     },
     getCartInfo: function (resolve, reject) {
+        this.setToken();
         return this._axios.get('/items')
             .then(resolve).catch(reject);
     }

@@ -29,6 +29,12 @@ let _catalog_service = {
             .then(resolve)
             .catch(reject);
     },
+    searchByKeywords: function (keywords, resolve, reject) {
+        reject = reject || this.rejectDefaule;
+        return this._axios.get(`/search/${keywords}`)
+            .then(resolve)
+            .catch(reject);
+    },
     test: function () {
         console.log('test');
         this.getProductList('DOGS',

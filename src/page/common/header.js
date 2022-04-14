@@ -2,7 +2,7 @@
 let $ = require('jquery');
 let _account_service = require('service/account_service.js');
 const _util = require('../../util/util');
-
+let _product_list = require('./product-list.js');
 let header = {
     _account: null,
     _this: this,
@@ -162,8 +162,12 @@ let header = {
                 window.localStorage.setItem('userInfo', JSON.stringify(loginRes.data.data));
                 header.showUserInfo();
             }
+        });
+        $('#searchInput').on('focus', function () {
+            $('#search').hide(400);
         })
-    }
+    },
+
 }
 
 module.exports = header.init();
