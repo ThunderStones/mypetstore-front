@@ -9,8 +9,6 @@ let _order_service = {
         let token = window.localStorage.getItem('token');
         if (token) {
             this._axios.defaults.headers.common['Authorization'] = token;
-        } else {
-            _header.showLoginForm();
         }
         return this;
     },

@@ -9,10 +9,10 @@ let _cart_service = {
         return this;
     },
     setToken: function (token) {
-        if (token === undefined) {
-            token = window.localStorage.getItem('token');
-        }
-        this._axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+        // if (token === undefined) {
+        //     token = window.localStorage.getItem('token');
+        // }
+        // this._axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     },
     updateCartItems: function (cartInfo, resolve, reject) {
         this.setToken();

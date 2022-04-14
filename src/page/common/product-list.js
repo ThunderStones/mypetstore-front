@@ -36,6 +36,10 @@ let _product_list = {
         })
         this.list_detail_box.find('#add_to_cart_btn').on('click', async function () {
             console.log(_product_list.select_item_id);
+            if (window.localStorage.getItem('token') === null) {
+                _util.showErrorMsg('请先登录');
+                return;
+            }
             let data = {itemId: _product_list.select_item_id, quantity: 1};
             let res = await _cart_service.updateCartItems([data]);
             if (res.data.status === 20) {

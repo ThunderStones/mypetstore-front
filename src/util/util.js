@@ -37,12 +37,12 @@ let _util = {
         console.log(msg);
 
         $('#error_shadow').show();
-        $('#errorMsg').find('.msg').text(msg);
-        $('#errorMsg').show(400);
+        $('#errorMsg1').find('.msg').text(msg);
+        $('#errorMsg1').show(400);
         $('#error_shadow').on('click', function () {
             console.log('click');
             $('#error_shadow').hide();
-            $('#errorMsg').hide(400);
+            $('#errorMsg1').hide(400);
         })
     },
     renderHtml: function (htmlTemplate, data) {

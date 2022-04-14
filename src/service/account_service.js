@@ -20,7 +20,7 @@ let _account_service = {
 
     },
     setToken: function (token) {
-        this._axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+        // this._axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     },
     getUserInfo: function (resolve, reject) {
         return this._axios.get('info')

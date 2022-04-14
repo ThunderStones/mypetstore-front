@@ -7,7 +7,7 @@ let _address_service = {
         return this;
     },
     setToken: function (token) {
-        this._axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+        // this._axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     },
     rejectDefaule: function (res) {
         console.log(res);
